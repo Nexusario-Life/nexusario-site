@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Block internal or non-public paths if any appear later
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /admin/
+
+# Allow important pages
+Allow: /products/
+Allow: /about
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+Allow: /disclaimer
+
+# Sitemap will be added next
+Sitemap: https://nexusario.com/sitemap.xml

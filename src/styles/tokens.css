@@ -1,0 +1,76 @@
+/* =========================
+   Nexusario — Brand Tokens
+   ========================= */
+
+:root {
+  /* =========================
+     Fonts
+     ========================= */
+  --font-heading: "Sora", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* =========================
+     Typography Scale
+     ========================= */
+  --text-hero: clamp(2.4rem, 4vw, 3.4rem);
+  --text-h1: 2.1rem;
+  --text-h2: 1.7rem;
+  --text-h3: 1.35rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+
+  /* =========================
+     Font Weights
+     ========================= */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* =========================
+     Core Text Colors
+     ========================= */
+  --text-primary: #1f1f1f;   /* Editorial dark */
+  --text-muted: #7e7368;     /* Warm muted gray */
+  --text-light: #F0F4EC;
+
+  /* =========================
+     Page Background (Canvas)
+     ========================= */
+   /* Primary page background (global canvas) */
+  --bg-main: #f8fff2;
+  --bg-box: #fcfffa;
+
+  /* =========================
+     Neutral UI
+     ========================= */
+  --border-soft: rgba(0, 0, 0, 0.08);
+
+  /* =========================
+     Generic Actions (Non-product)
+     ========================= */
+  --action-primary: #8b6a4f;
+  --action-hover: #684c37;
+
+  /* =========================
+     Hair Product Identity
+     ========================= */
+  --hair-primary: #2f4f3e;
+  --hair-accent: #3e6b55;
+
+  --action-hair-primary: #3e6b55;
+  --action-hair-hover: #2f4f3e;
+
+  /* =========================
+     Lotion Product Identity
+     ========================= */
+  --lotion-primary: #6b4a3a;
+  --lotion-accent: #8a5d46;
+
+  /* =========================
+     Brand Frame (Header & Footer)
+     ========================= */
+  /* Option 1 — Deep neutral charcoal (trial) */
+   --brand-frame-bg: #2a2a28;
+   --brand-frame-text: #f4f4f1;
+   --brand-frame-muted: #c7c7c0;
+}

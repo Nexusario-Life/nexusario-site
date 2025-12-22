@@ -1,0 +1,103 @@
+<section class="brand-hero">
+  <div class="inner hero-inner">
+    <div class="hero-copy">
+      <h1>Everyday care, elevated.</h1>
+      <p>
+        Thoughtfully formulated essentials for hair and skin —
+        calm, effective, and made to fit real routines.
+      </p>
+
+      <a href="/#products" class="cta-primary cta-brand">
+        Explore products
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+.brand-hero {
+  min-height: min(95vh, 920px);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Very subtle editorial depth — NOT a background */
+.brand-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    900px 400px at 20% 20%,
+    rgba(0, 0, 0, 0.035),
+    transparent 60%
+  );
+}
+
+.hero-inner {
+  width: 100%;
+  position: relative;
+}
+
+.hero-copy {
+  max-width: 640px;
+  animation: heroFade 0.9s ease-out both;
+}
+
+.hero-copy h1 {
+  margin-bottom: 1.2rem;
+  line-height: 1.15;
+}
+
+.hero-copy p {
+  max-width: 520px;
+  margin-bottom: 2.4rem;
+  color: var(--text-primary);
+  opacity: 0.85;
+}
+
+.cta-brand {
+  background: var(--action-primary);
+}
+
+.cta-brand:hover {
+  background: var(--action-hover);
+}
+
+/* Neutral brand CTA — NOT product-colored */
+.cta-primary {
+  display: inline-block;
+  padding: 0.9rem 1.7rem;
+  font-size: 0.95rem;
+  font-weight: var(--weight-medium);
+  color: #fff;
+  background: var(--action-primary);
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta-primary:hover {
+  transform: translateY(-1px);
+  background: var(--action-hover);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy {
+    animation: none;
+  }
+}
+
+/* Soft entrance animation */
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

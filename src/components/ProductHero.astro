@@ -1,0 +1,235 @@
+---
+interface ProductHeroProps {
+  id: string;
+  title: string;
+  description: string;
+  bullets: string[];
+  image: string;
+  detailLink: string;
+  amazonLink: string;
+  flipkartLink: string;
+  theme: "section--hair" | "section--lotion" | "section--neutral";
+  layout?: "normal" | "reverse";
+}
+
+const {
+  id,
+  title,
+  description,
+  bullets,
+  image,
+  detailLink,
+  amazonLink,
+  flipkartLink,
+  theme,
+  layout = "normal"
+} = Astro.props as ProductHeroProps;
+---
+
+<section id={id} class={`product-hero section ${theme} layout-${layout}`}>
+  <div class="inner product-inner">
+    <div class="product-copy">
+      <h2>{title}</h2>
+      <p class="product-desc">{description}</p>
+
+      <ul class="product-bullets">
+        {bullets.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <div class="product-cta">
+        <a href={detailLink} class="cta-primary">View details</a>
+
+        <a
+          href={amazonLink}
+          target="_blank"
+          rel="noopener"
+          class="cta-secondary"
+        >
+          Buy on Amazon
+        </a>
+
+        <a
+          href={flipkartLink}
+          target="_blank"
+          rel="noopener"
+          class="cta-secondary"
+        >
+          Buy on Flipkart
+        </a>
+      </div>
+    </div>
+
+    <div class="product-visual">
+      <img src={image} alt={title} loading="eager" />
+    </div>
+  </div>
+</section>
+
+<style>
+/* =========================
+   Product Hero Base
+   ========================= */
+
+.product-hero {
+  margin-top: 10px;
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.product-hero + .product-hero {
+  margin-top: 5rem;
+}
+
+.product-copy {
+  margin-top: 2.5rem;
+}
+
+.product-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 5rem;
+  align-items: flex-start;
+}
+
+.product-copy h2 {
+  margin-bottom: 1.8rem;
+}
+
+.product-desc {
+  max-width: 520px;
+  margin: 0.75rem 0 1.8rem;
+  line-height: 1.7;
+}
+
+.product-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+}
+
+.product-bullets li {
+  color: var(--text-muted);
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+}
+
+.product-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+/* =========================
+   CTA — Semantic System
+   ========================= */
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2.2rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  color: #fff;
+  background: var(--action-primary);
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.cta-primary:hover {
+  background: var(--action-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+}
+
+.cta-secondary {
+  padding: 0.75rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: var(--weight-medium);
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: transparent;
+  border-radius: 999px;
+
+  /* Safe default + theme override */
+  border: 2px solid var(--action-border-soft, rgba(0, 0, 0, 0.22));
+
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+
+.cta-secondary:hover {
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Product Visual
+   ========================= */
+
+.product-visual {
+  padding-right: 2rem;
+}
+
+.product-visual img {
+  max-width: 100%;
+  border-radius: 14px;
+}
+
+.layout-normal .product-visual {
+  padding-right: 2rem;
+}
+
+.layout-reverse .product-visual {
+  padding-left: 2rem;
+}
+
+/* =========================
+   Theme Bindings
+   ========================= */
+
+.section--hair {
+  --action-primary-active: var(--action-hair-primary);
+  --action-primary-hover: var(--action-hair-hover);
+  --action-border-soft: rgba(47, 79, 62, 0.45);
+}
+
+.section--lotion {
+  --action-primary-active: var(--lotion-accent);
+  --action-primary-hover: var(--lotion-primary);
+  --action-border-soft: rgba(107, 74, 58, 0.45);
+}
+
+.section--neutral {
+  --action-primary-active: var(--action-primary);
+  --action-primary-hover: var(--action-hover);
+  --action-border-soft: var(--border-soft);
+}
+
+/* =========================
+   Layout Variants (Reusable)
+   ========================= */
+
+.layout-normal .product-inner {
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+.layout-reverse .product-inner {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+
+.layout-reverse .product-copy {
+  order: 2;
+}
+
+.layout-reverse .product-visual {
+  order: 1;
+  padding-right: 0;
+  padding-left: 2rem;
+}
+
+
+</style>

@@ -1,0 +1,116 @@
+---
+interface Feature {
+  icon: string; // emoji OR HTML (img / svg)
+  title: string;
+  description: string;
+}
+
+const { features } = Astro.props as { features: Feature[] };
+---
+
+<div class="product-features">
+  <div class="inner features-inner">
+    {features.map((item) => (
+      <div class="feature-card">
+        <!-- Icon + Title (FORCED single line) -->
+        <div class="feature-head">
+          <span class="feature-icon" set:html={item.icon}></span>
+          <span class="feature-title">{item.title}</span>
+        </div>
+
+        <p class="feature-desc" set:html={item.description}></p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+/* =========================
+   Product Features Strip
+   ========================= */
+
+.product-features {
+  margin-top: 2.5rem;
+}
+
+.features-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Card */
+.feature-card {
+  background: var(--bg-box);
+  border-radius: 18px;
+  padding: 1.8rem 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+/* Icon + Title row — LOCKED */
+.feature-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Icon */
+.feature-icon {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 1px;
+
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* SVG / IMG inside icon */
+.feature-icon img,
+.feature-icon svg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* Title — FORCE inline */
+.feature-title {
+  font-family: var(--font-heading);
+  font-size: 1.1em;
+  font-weight: var(--weight-semibold);
+
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Description */
+.feature-desc {
+  font-size: 1em;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .features-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+  padding: 1.6rem 1.4rem;
+  }
+}
+</style>

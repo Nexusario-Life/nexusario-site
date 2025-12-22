@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: "✉️",
+    title: "Email Support",
+    description:
+      "For any questions, support requests, or general inquiries, you can reach us directly at <a href='mailto:support@nexusario.com'>support@nexusario.com</a>. We aim to respond within a reasonable timeframe."
+  },
+  {
+    icon: "🕒",
+    title: "Response Time",
+    description:
+      "Our support team typically responds within 1–2 business days. Response times may vary during holidays or high-volume periods."
+  },
+  {
+    icon: "🧴",
+    title: "Product Questions",
+    description:
+      "If you have questions about ingredients, usage, or product suitability, please mention the product name clearly in your email so we can assist you more effectively."
+  },
+  {
+    icon: "🛒",
+    title: "Order & Delivery",
+    description:
+      "For order status, delivery, returns, or refunds, please contact the marketplace (Amazon or Flipkart) where the purchase was made, as these are managed directly by the respective platforms."
+  },
+  {
+    icon: "🤝",
+    title: "Business & Partnerships",
+    description:
+      "For business inquiries, collaborations, or partnerships, reach out via email with a brief introduction and relevant details. We review all legitimate proposals."
+  }
+];
+---
+
+<BaseLayout title="Contact Us"
+description="Contact Nexusario for product questions, support, or business inquiries. Reach us directly via email for assistance and information.">
+  <main class="legal-page">
+    <header class="legal-header" style="text-align: center; margin-bottom: 2.4rem;">
+      <h1><br>Contact Us</h1>
+    </header>
+
+    <!-- Contact content -->
+    <div class="product-features">
+      <div class="inner features-inner">
+        {features.map((item) => (
+          <div class="feature-card">
+            <div class="feature-head">
+              <span class="feature-icon" set:html={item.icon}></span>
+              <span class="feature-title">{item.title}</span>
+            </div>
+            <p class="feature-desc" set:html={item.description}></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+/* Card */
+.feature-card {
+  background: var(--bg-box);
+  border-radius: 18px;
+  padding: 1.9rem 1.7rem;
+}
+
+.feature-head {
+  margin-bottom: 0.6rem;
+}
+
+.feature-desc {
+  margin: 0;
+}
+</style>

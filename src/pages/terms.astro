@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: "📜",
+    title: "Introduction",
+    description:
+      "These Terms & Conditions govern your use of the Nexusario website. By accessing or using this site, you agree to comply with and be bound by these terms. If you do not agree, please discontinue use of the website."
+  },
+  {
+    icon: "🌐",
+    title: "Nature of the Website",
+    description:
+      "Nexusario is a brand and informational platform. We do not directly sell products or process payments on this website. All purchases are completed through third-party marketplaces such as Amazon and Flipkart, which operate under their own terms and policies."
+  },
+  {
+    icon: "🔗",
+    title: "Third-Party Links",
+    description:
+      "This website contains links to third-party websites, including e-commerce platforms and social media services. Nexusario has no control over and assumes no responsibility for the content, policies, or practices of any third-party sites."
+  },
+  {
+    icon: "🧾",
+    title: "Product Information",
+    description:
+      "Product descriptions, images, and other content on this website are provided for general informational purposes only. Actual product details, pricing, availability, and offers may vary on third-party platforms and are subject to change without notice."
+  },
+  {
+    icon: "⚠️",
+    title: "No Warranties",
+    description:
+      "All content on this website is provided on an “as is” and “as available” basis. Nexusario makes no warranties or representations of any kind, express or implied, regarding the accuracy, completeness, or reliability of the information presented."
+  },
+  {
+    icon: "🚫",
+    title: "Limitation of Liability",
+    description:
+      "To the maximum extent permitted by law, Nexusario shall not be liable for any direct, indirect, incidental, or consequential damages arising out of or related to your use of this website or reliance on its content."
+  },
+  {
+    icon: "🛠️",
+    title: "Acceptable Use",
+    description:
+      "You agree not to misuse the website, attempt unauthorized access, interfere with site functionality, or use the content for unlawful purposes. Any such activity may result in restricted access or legal action."
+  },
+  {
+    icon: "✏️",
+    title: "Changes to Terms",
+    description:
+      "Nexusario reserves the right to update or modify these Terms & Conditions at any time. Continued use of the website after changes are posted constitutes acceptance of the revised terms."
+  },
+  {
+    icon: "✉️",
+    title: "Contact",
+    description:
+      "If you have questions regarding these Terms & Conditions, you may contact us at <a href='mailto:support@nexusario.com'>support@nexusario.com</a>."
+  }
+];
+---
+
+<BaseLayout title="Terms & Conditions"
+description="Review the Terms & Conditions governing the use of the Nexusario website, including third-party links and platform responsibilities." >
+  <main class="legal-page">
+    <header class="legal-header" style="text-align: center; margin-bottom: 2.4rem;">
+      <h1><br>Terms & Conditions</h1>
+    </header>
+    
+    <!-- Last updated -->
+    <div class="product-features">
+      <div class="inner features-inner">
+        <div class="feature-card">
+          <p class="feature-desc" style="font-weight: bold; color: #555;">
+            Last updated: {new Date().getFullYear()}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms content -->
+    <div class="product-features">
+      <div class="inner features-inner">
+        {features.map((item) => (
+          <div class="feature-card">
+            <div class="feature-head">
+              <span class="feature-icon" set:html={item.icon}></span>
+              <span class="feature-title">{item.title}</span>
+            </div>
+            <p class="feature-desc" set:html={item.description}></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+/* Card */
+.feature-card {
+  background: var(--bg-box);
+  border-radius: 18px;
+  padding: 1.9rem 1.7rem;
+}
+
+.feature-head {
+  margin-bottom: 0.6rem;
+}
+
+.feature-desc {
+  margin: 0;
+}
+</style>

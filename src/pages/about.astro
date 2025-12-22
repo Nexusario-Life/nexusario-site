@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: "🌱",
+    title: "Who We Are",
+    description:
+      "Nexusario is a modern personal care brand focused on thoughtfully crafted products for everyday routines. We believe care should feel simple, honest, and consistent — not overwhelming or trend-driven."
+  },
+  {
+    icon: "🧪",
+    title: "Our Approach",
+    description:
+      "Our formulations are designed with a balance of herbal extracts, functional ingredients, and practical usage in mind. We prioritize clarity, ingredient intent, and real-world use over exaggerated claims."
+  },
+  {
+    icon: "🇮🇳",
+    title: "Made in India",
+    description:
+      "All Nexusario products are developed and manufactured in India, following responsible sourcing and quality-focused production practices. We take pride in building locally while thinking globally."
+  },
+  {
+    icon: "🧴",
+    title: "What We Make",
+    description:
+      "Our product range includes personal care essentials such as hair oils, body lotions, and related daily-use formulations. Each product is created to integrate seamlessly into regular self-care routines."
+  },
+  {
+    icon: "🛒",
+    title: "How We Sell",
+    description:
+      "Nexusario products are available through trusted third-party marketplaces such as Amazon and Flipkart. This website serves as a brand and information platform, helping customers understand our products before purchase."
+  },
+  {
+    icon: "🤍",
+    title: "Our Philosophy",
+    description:
+      "We believe good products earn trust through consistency, transparency, and everyday reliability. Nexusario is built for people who value care that works quietly, without noise or exaggeration."
+  }
+];
+---
+
+<BaseLayout
+  title="About Nexusario"
+  description="Learn about Nexusario, our approach to personal care, and our philosophy behind thoughtfully crafted everyday products."
+>
+  <main class="legal-page">
+    <header class="legal-header" style="text-align: center; margin-bottom: 2.4rem;">
+      <h1><br>About Nexusario</h1>
+    </header>
+
+    <!-- About content -->
+    <div class="product-features">
+      <div class="inner features-inner">
+        {features.map((item) => (
+          <div class="feature-card">
+            <div class="feature-head">
+              <span class="feature-icon" set:html={item.icon}></span>
+              <span class="feature-title">{item.title}</span>
+            </div>
+            <p class="feature-desc">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+/* Card */
+.feature-card {
+  background: var(--bg-box);
+  border-radius: 18px;
+  padding: 1.9rem 1.7rem;
+}
+
+.feature-head {
+  margin-bottom: 0.6rem;
+}
+
+.feature-desc {
+  margin: 0;
+}
+
+</style>

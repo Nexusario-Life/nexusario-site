@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BrandHero from "../components/BrandHero.astro";
+import ProductHero from "../components/ProductHero.astro";
+import ProductFeatures from "../components/ProductFeatures.astro";
+
+---
+
+<BaseLayout 
+title="Nexusario | Premium Care"
+description="Nexusario is a personal care brand creating thoughtfully crafted products for everyday routines, designed with clarity, balance, and real-world use in mind.">
+  <BrandHero />
+
+  <div id="products"></div>
+  <ProductHero
+    id="product-hair-oil"
+    theme="section--hair"
+    title="Advanced Hair Growth Oil"
+    description="A lightweight blend crafted to nourish the scalp and support stronger, healthier-looking hair."
+    bullets={[
+      "Infused with amla, fenugreek, and aloe",
+      "Non-greasy, fast-absorbing texture",
+      "Designed for regular, everyday use"
+    ]}
+    image="/images/hair-oil.jpg"
+    detailLink="/products/hair-oil"
+    amazonLink="https://www.amazon.in/dp/B0FVTGCDL7"
+    flipkartLink="https://www.flipkart.com/nexusario-hair-growth-oil-amla-jojoba-coconut-aloe-vera-natural-no-paraben-100-ml/p/itmddefaa853819d?pid=HOLHHP5TB2VY6BN6"
+    /* default layout = normal */
+  />
+
+  <ProductHero
+    id="product-lotion"
+    theme="section--lotion"
+    layout="reverse" 
+    title="Deep Hydration Body Lotion"
+    description="A rich yet lightweight lotion designed for everyday comfort. Deeply nourishing, fast-absorbing, and crafted to leave skin feeling soft, smooth, and cared for throughout the day."
+    bullets={[
+      "Rich hydration without heaviness",
+      "Smooth, non-sticky finish",
+      "Suitable for daily use",
+      "Crafted for all skin types"
+    ]}
+    image="/images/body-lotion.jpg"
+    detailLink="/products/body-lotion"
+    amazonLink="https://www.amazon.in/dp/B0FVVJDB8C"
+    flipkartLink="https://www.flipkart.com/nexusario-moisturizer-body-lotion-men-women/p/itm0b661845f5beb?pid=MSCHGS3ZDFRGZSHP"
+  />
+
+  <ProductFeatures
+  features={[
+    {
+      icon: "🌿",
+      title: "Natural Blend",
+      description:
+        "Enriched with premium natural ingredients like Almond, Amla, Mango Butter and more."
+    },
+    {
+      icon: "💚",
+      title: "Paraben Free",
+      description:
+        "Safe, toxin-free formulations designed for everyday hair care."
+    },
+    {
+      icon: `<img
+    src="/icons/india-flag.svg"
+    alt="Made in India"
+    loading="lazy"/>`,
+      title: "Made in India",
+      description:
+        "Proudly formulated and crafted locally with high-quality standards."
+    }
+  ]}
+/>
+
+
+</BaseLayout>

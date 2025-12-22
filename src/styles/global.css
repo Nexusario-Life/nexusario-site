@@ -1,0 +1,166 @@
+/* =========================
+   Global Base Styles
+   ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  color: var(--text-primary);
+  line-height: 1.6;
+
+  /* Global editorial canvas */
+  background: var(--bg-main);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================
+   Typography
+   ========================= */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-hero);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* =========================
+   Links & Media
+   ========================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================
+   Layout Utilities
+   ========================= */
+
+/* Standard container (rare use) */
+.container {
+  max-width: 1200px;
+  padding: 0 1.25rem;
+  margin: 0 auto;
+}
+
+/* Editorial inner wrapper (primary system) */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section rhythm only — NO background responsibility */
+.section {
+  width: 100%;
+  padding: 6rem 0;
+}
+
+/* Semantic hooks only (no visual styles) */
+.section--neutral {
+  padding: 0;
+}
+
+.section--hair {
+  padding: 0;
+}
+
+.section--lotion {
+  padding: 0;
+}
+
+#products {
+  scroll-margin-top: 6rem;
+}
+
+
+/* =========================
+   Reading Rhythm (Global)
+   ========================= */
+
+.legal-page {
+  padding: 3.5rem 0 4rem;
+}
+
+.legal-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.legal-updated {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+
+@media (max-width: 768px) {
+
+  /* Page padding */
+  .legal-page {
+    padding: 2.5rem 0 3rem;
+  }
+
+  /* Feature cards */
+  .feature-card {
+    padding: 1.6rem 1.4rem;
+  }
+
+  /* Titles */
+  .feature-title {
+    font-size: 1.05rem;
+  }
+
+  /* Descriptions */
+  .feature-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+}
+
+
+#products {
+  scroll-margin-top: 6rem;
+}

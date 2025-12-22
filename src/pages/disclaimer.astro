@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: "ℹ️",
+    title: "General Information",
+    description:
+      "All information provided on the Nexusario website is for general informational purposes only. While we strive to keep content accurate and up to date, we make no guarantees regarding completeness, reliability, or accuracy."
+  },
+  {
+    icon: "🧴",
+    title: "Product Representation",
+    description:
+      "Product images, descriptions, ingredients, and usage information displayed on this website are intended for reference only. Actual product appearance, packaging, or formulation may vary based on manufacturing batches or marketplace listings."
+  },
+  {
+    icon: "🛒",
+    title: "Third-Party Marketplaces",
+    description:
+      "Nexusario does not sell products directly through this website. All purchases are completed on third-party platforms such as Amazon and Flipkart. Pricing, availability, delivery, returns, and warranties are governed by the respective marketplace’s policies."
+  },
+  {
+    icon: "⚠️",
+    title: "No Medical or Professional Advice",
+    description:
+      "Content on this website is not intended to substitute professional medical, dermatological, or healthcare advice. Always consult a qualified professional before using any personal care or cosmetic product, especially if you have sensitivities or medical conditions."
+  },
+  {
+    icon: "🔒",
+    title: "Limitation of Liability",
+    description:
+      "To the maximum extent permitted by law, Nexusario shall not be liable for any loss, injury, or damage arising from the use of this website, reliance on its content, or purchases made through third-party platforms."
+  },
+  {
+    icon: "🔄",
+    title: "External Links",
+    description:
+      "This website may contain links to external websites or services. Nexusario has no control over the content or availability of these sites and does not endorse or assume responsibility for them."
+  },
+  {
+    icon: "✏️",
+    title: "Changes to This Disclaimer",
+    description:
+      "Nexusario reserves the right to update or modify this Disclaimer at any time without prior notice. Any changes will be effective immediately upon posting."
+  },
+  {
+    icon: "✉️",
+    title: "Contact",
+    description:
+      "If you have any questions regarding this Disclaimer, you may contact us at <a href='mailto:support@nexusario.com'>support@nexusario.com</a>."
+  }
+];
+---
+
+<BaseLayout title="Disclaimer"
+description="Read the Nexusario Disclaimer regarding product information, third-party platforms, and limitations of liability.">
+  <main class="legal-page">
+    <header class="legal-header" style="text-align: center; margin-bottom: 2.4rem;">
+      <h1><br>Disclaimer</h1>
+    </header>
+
+    <!-- Last updated -->
+    <div class="product-features">
+      <div class="inner features-inner">
+        <div class="feature-card">
+          <p class="feature-desc" style="font-weight: bold; color: #555;">
+            Last updated: {new Date().getFullYear()}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer content -->
+    <div class="product-features">
+      <div class="inner features-inner">
+        {features.map((item) => (
+          <div class="feature-card">
+            <div class="feature-head">
+              <span class="feature-icon" set:html={item.icon}></span>
+              <span class="feature-title">{item.title}</span>
+            </div>
+            <p class="feature-desc" set:html={item.description}></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+/* Card */
+.feature-card {
+  background: var(--bg-box);
+  border-radius: 18px;
+  padding: 1.9rem 1.7rem;
+}
+
+.feature-head {
+  margin-bottom: 0.6rem;
+}
+
+.feature-desc {
+  margin: 0;
+}
+</style>

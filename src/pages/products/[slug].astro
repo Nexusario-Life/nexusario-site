@@ -1,0 +1,387 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import products from "../../data/products";
+import type { Product } from "../../data/products";
+
+import "../../styles/pdp.css";
+
+export function getStaticPaths() {
+  return Object.keys(products).map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const product = products[slug as string] as Product;
+
+if (!product) {
+  throw new Error(`Product not found: ${slug}`);
+}
+
+const images = product.images;
+---
+
+<head>
+  <meta charset="utf-8" />
+
+</head>
+
+<BaseLayout title={product.title}
+description={`Explore ${product.title} by Nexusario — ingredients, benefits, and how to use, with clear information to help you choose confidently.`}>
+  <main class="pdp">
+    <section class="pdp-hero">
+      <div class="pdp-hero-grid">
+
+        <!-- IMAGE COLUMN -->
+        <div class="pdp-media">
+          <div class="pdp-main-image">
+            <img
+              id="pdp-active-image"
+              src={images[0]}
+              alt={product.title}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+
+          {images.length > 1 && (
+            <div class="pdp-thumbnails">
+              {images.map((img: string, index: number) => (
+                <button
+                  class={`pdp-thumb ${index === 0 ? "is-active" : ""}`}
+                  data-image={img}
+                  aria-label={`View image ${index + 1}`}
+                >
+                  <img src={img} alt="" loading="lazy" decoding="async" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- CONTENT COLUMN -->
+        <div class="pdp-content">
+          <h1 class="pdp-title">{product.title}</h1>
+          <p class="pdp-subtitle">{product.subtitle}</p>
+
+          <ul class="pdp-highlights">
+            {product.highlights.map((item: string) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          {product.buyLinks && (
+            <div class="pdp-ctas">
+              {product.buyLinks.amazon && (
+                <a
+                  href={product.buyLinks.amazon}
+                  class="pdp-btn pdp-btn--amazon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buy on Amazon
+                </a>
+              )}
+
+              {product.buyLinks.flipkart && (
+                <a
+                  href={product.buyLinks.flipkart}
+                  class="pdp-btn pdp-btn--flipkart"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buy on Flipkart
+                </a>
+              )}
+            </div>
+          )}
+
+          <div class="pdp-accordion">
+            {product.accordions.map((acc) => (
+              <details>
+                <summary class="pdp-accordion-summary">
+                  <div class="pdp-summary-content">
+                    <span>{acc.title}</span>
+                    <span class="chevron"></span>
+                  </div>
+                </summary>
+
+                <div class="accordion-body">
+                  <ul>
+                    {acc.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
+            ))}
+          </div>
+
+          <div class="pdp-trust">
+            <div>
+              <span style="display:inline-flex;align-items:center;">
+                <img
+                  src="/icons/india-flag.svg"
+                  alt="India Flag"
+                  width="16"
+                  height="12"
+                  style="margin-right:6px;"
+                />
+                Made in India&nbsp;|
+              </span>
+              <span>🌿 Herbal Extracts&nbsp;|</span>
+              <span>🐰 Cruelty-free</span>
+            </div>
+          </div>
+            <div class="pdp-trust-small">Paraben-free formula. Suitable for everyday use.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="pdp-related">
+      <h2 class="pdp-related-title">Explore more from Nexusario</h2>
+
+      <div class="pdp-related-grid">
+        {Object.entries(products)
+          .filter(([key]) => key !== slug)
+          .slice(0, 2)
+          .map(([key, p]) => (
+            <a href={`/products/${key}`} class="pdp-related-card">
+              <img
+                src={p.images[0]}
+                alt={p.title}
+                loading="lazy"
+                decoding="async"
+              />
+              <div>
+                <h3>{p.title}</h3>
+                <p>{p.subtitle}</p>
+              </div>
+            </a>
+          ))}
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- PDP Image Lightbox (hidden by default) -->
+  <div class="pdp-lightbox" inert>
+    <div class="pdp-lightbox-backdrop"></div>
+
+    <div class="pdp-lightbox-content" role="dialog" aria-modal="true">
+      <!-- Close button -->
+      <button
+        type="button"
+        class="pdp-lightbox-close"
+        aria-label="Close image viewer"
+      >
+        ×
+      </button>
+
+      <!-- Main large image -->
+      <div class="pdp-lightbox-main">
+        <img
+          src=""
+          alt=""
+          class="pdp-lightbox-image"
+          decoding="async"
+        />
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="pdp-lightbox-thumbnails">
+        {images.map((img: string, index: number) => (
+          <button
+            type="button"
+            class="pdp-lightbox-thumb"
+            data-image={img}
+            aria-label={`View image ${index + 1}`}
+          >
+            <img src={img} alt="" loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Image switcher -->
+  <script>
+  const pdp = document.querySelector(".pdp");
+
+  if (pdp instanceof HTMLElement) {
+    const imagesList: string[] = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(".pdp-thumb")
+    )
+    .map((btn) => btn.dataset.image)
+    .filter((src): src is string => Boolean(src));
+    
+    const mainImage = document.getElementById("pdp-active-image");
+    const mainImageWrapper = document.querySelector(".pdp-main-image");
+
+    /* ===============================
+       PDP THUMBNAIL SWITCHING
+    =============================== */
+    pdp.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const btn = target.closest(".pdp-thumb");
+      if (!(btn instanceof HTMLButtonElement)) return;
+
+      const img = document.getElementById("pdp-active-image");
+      if (!(img instanceof HTMLImageElement)) return;
+
+      const src = btn.dataset.image;
+      if (!src) return;
+
+      img.src = src;
+
+      document
+        .querySelectorAll(".pdp-thumb")
+        .forEach((b) => b.classList.remove("is-active"));
+
+      btn.classList.add("is-active");
+    });
+
+    /* ===============================
+       LIGHTBOX LOGIC
+    =============================== */
+
+    const lightbox = document.querySelector(".pdp-lightbox");
+    const lightboxImageEl = document.querySelector(".pdp-lightbox-image");
+    const lightboxClose = document.querySelector(".pdp-lightbox-close");
+    const lightboxBackdrop = document.querySelector(".pdp-lightbox-backdrop");
+    const lightboxThumbs = document.querySelectorAll(".pdp-lightbox-thumb");
+
+    if (
+      lightbox instanceof HTMLElement &&
+      lightboxImageEl instanceof HTMLImageElement &&
+      mainImage instanceof HTMLImageElement &&
+      mainImageWrapper instanceof HTMLElement &&
+      lightboxClose instanceof HTMLButtonElement &&
+      lightboxBackdrop instanceof HTMLElement
+    ) {
+      const lightboxEl = lightbox;
+      const lightboxImage = lightboxImageEl;
+      const closeBtn = lightboxClose;
+      const mainImageEl = mainImageWrapper;
+
+      let currentIndex = 0;
+
+      /* ---------- OPEN ---------- */
+      mainImageWrapper.addEventListener("click", () => {
+        openLightbox(mainImage.src);
+      });
+
+      function openLightbox(src: string): void {
+        lightboxImage.src = src;
+        currentIndex = imagesList.indexOf(src);
+
+        lightboxEl.removeAttribute("inert");
+        document.body.style.overflow = "hidden";
+
+        // Mobile scroll lock (prevents bounce)
+        document.documentElement.style.overflow = "hidden";
+
+        closeBtn.focus();
+        syncLightboxThumbs(src);
+      }
+
+      /* ---------- CLOSE ---------- */
+      function closeLightbox() {
+        lightboxEl.setAttribute("inert", "");
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+
+        mainImageEl.focus();
+      }
+
+      closeBtn.addEventListener("click", closeLightbox);
+      lightboxBackdrop.addEventListener("click", closeLightbox);
+
+      /* ---------- KEYBOARD CONTROLS ---------- */
+      document.addEventListener("keydown", (e) => {
+        if (lightboxEl.hasAttribute("inert")) return;
+
+        if (e.key === "Escape") {
+          closeLightbox();
+          return;
+        }
+
+        if (e.key === "ArrowRight") {
+          currentIndex = (currentIndex + 1) % imagesList.length;
+          const src = imagesList[currentIndex];
+          lightboxImage.src = src;
+          syncLightboxThumbs(src);
+        }
+
+        if (e.key === "ArrowLeft") {
+          currentIndex =
+            (currentIndex - 1 + imagesList.length) % imagesList.length;
+          const src = imagesList[currentIndex];
+          lightboxImage.src = src;
+          syncLightboxThumbs(src);
+        }
+      });
+
+      /* ---------- LIGHTBOX THUMBNAILS ---------- */
+      lightboxThumbs.forEach((thumb) => {
+        if (!(thumb instanceof HTMLButtonElement)) return;
+
+        thumb.addEventListener("click", () => {
+          const src = thumb.dataset.image;
+          if (!src) return;
+
+          lightboxImage.src = src;
+          currentIndex = imagesList.indexOf(src);
+          syncLightboxThumbs(src);
+        });
+      });
+
+      function syncLightboxThumbs(activeSrc: string): void {
+        lightboxThumbs.forEach((thumb) => {
+          if (!(thumb instanceof HTMLButtonElement)) return;
+
+          thumb.classList.toggle(
+            "is-active",
+            thumb.dataset.image === activeSrc
+          );
+        });
+      }
+    }
+  }
+</script>
+
+
+
+
+</BaseLayout>
+
+
+
+
+
+
+<!-- Product structured data -->
+<script type="application/ld+json">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.title,
+    "description": product.subtitle,
+    "brand": {
+      "@type": "Brand",
+      "name": "Nexusario"
+    },
+    "image": product.images,
+    "category": "Personal Care",
+    "countryOfOrigin": {
+      "@type": "Country",
+      "name": "India"
+    }
+  })}
+</script>
