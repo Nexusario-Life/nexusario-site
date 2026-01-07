@@ -18,6 +18,11 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <link
+      rel="canonical"
+      href={`https://nexusario.com${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`}
+    />
+
     <meta
       name="description"
       content={description ?? "Nexusario is a personal care brand focused on thoughtfully crafted products for everyday routines."}
