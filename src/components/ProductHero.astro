@@ -66,13 +66,13 @@ const {
 </section>
 
 <style>
-/* =========================
-   Product Hero Base
-   ========================= */
+/* =====================================================
+   Product Hero — Base
+===================================================== */
 
 .product-hero {
-  margin-top: 10px;
   position: relative;
+  margin-top: 10px;
   padding-bottom: 3rem;
 }
 
@@ -80,15 +80,15 @@ const {
   margin-top: 5rem;
 }
 
-.product-copy {
-  margin-top: 2.5rem;
-}
-
 .product-inner {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 5rem;
   align-items: flex-start;
+}
+
+.product-copy {
+  margin-top: 2.5rem;
 }
 
 .product-copy h2 {
@@ -119,10 +119,9 @@ const {
   gap: 1rem;
 }
 
-
-/* =========================
-   CTA — Semantic System
-   ========================= */
+/* =====================================================
+   CTA System
+===================================================== */
 
 .cta-primary {
   display: inline-flex;
@@ -153,22 +152,18 @@ const {
   color: var(--text-primary);
   background: transparent;
   border-radius: 999px;
-
-  /* Safe default + theme override */
   border: 2px solid var(--action-border-soft, rgba(0, 0, 0, 0.22));
-
   transition: background 0.2s ease, transform 0.2s ease;
 }
-
 
 .cta-secondary:hover {
   background: rgba(0, 0, 0, 0.04);
   transform: translateY(-1px);
 }
 
-/* =========================
+/* =====================================================
    Product Visual
-   ========================= */
+===================================================== */
 
 .product-visual {
   padding-right: 2rem;
@@ -179,17 +174,9 @@ const {
   border-radius: 14px;
 }
 
-.layout-normal .product-visual {
-  padding-right: 2rem;
-}
-
-.layout-reverse .product-visual {
-  padding-left: 2rem;
-}
-
-/* =========================
+/* =====================================================
    Theme Bindings
-   ========================= */
+===================================================== */
 
 .section--hair {
   --action-primary-active: var(--action-hair-primary);
@@ -209,9 +196,9 @@ const {
   --action-border-soft: var(--border-soft);
 }
 
-/* =========================
-   Layout Variants (Reusable)
-   ========================= */
+/* =====================================================
+   Layout Variants (Desktop)
+===================================================== */
 
 .layout-normal .product-inner {
   grid-template-columns: 1.15fr 0.85fr;
@@ -227,9 +214,72 @@ const {
 
 .layout-reverse .product-visual {
   order: 1;
-  padding-right: 0;
   padding-left: 2rem;
+  padding-right: 0;
 }
 
+/* =====================================================
+   Mobile (Scoped, Full-Bleed Image)
+===================================================== */
 
+@media (max-width: 768px) {
+
+  .product-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .product-hero {
+    padding-bottom: 2rem;
+  }
+
+  .product-hero + .product-hero {
+    margin-top: 3rem;
+  }
+
+  /* Full-bleed image (symmetric) */
+  .product-visual {
+    order: -1;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .layout-normal .product-visual,
+  .layout-reverse .product-visual {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .product-visual img {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 16px;
+  }
+
+  /* Text + CTA canvas */
+  .product-copy {
+    margin-top: 0;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
+  .product-bullets {
+    display: inline-block;
+    text-align: left;
+    margin-inline: auto;
+  }
+
+  .product-cta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .product-cta a {
+    text-align: center;
+  }
+
+}
 </style>

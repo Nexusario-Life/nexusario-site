@@ -97,26 +97,24 @@ img {
   padding: 6rem 0;
 }
 
-/* Semantic hooks only (no visual styles) */
-.section--neutral {
-  padding: 0;
-}
+/* =========================
+   Section Semantic Hooks
+   (override rhythm only)
+   ========================= */
 
-.section--hair {
-  padding: 0;
-}
-
+.section--neutral,
+.section--hair,
 .section--lotion {
   padding: 0;
 }
 
+/* Anchor offset for in-page navigation */
 #products {
   scroll-margin-top: 6rem;
 }
 
-
 /* =========================
-   Reading Rhythm (Global)
+   Reading / Legal Pages
    ========================= */
 
 .legal-page {
@@ -134,10 +132,13 @@ img {
   color: var(--text-muted);
 }
 
+/* =========================
+   Feature Content Blocks
+   ========================= */
 
 @media (max-width: 768px) {
 
-  /* Page padding */
+  /* Legal page rhythm */
   .legal-page {
     padding: 2.5rem 0 3rem;
   }
@@ -147,20 +148,13 @@ img {
     padding: 1.6rem 1.4rem;
   }
 
-  /* Titles */
   .feature-title {
     font-size: 1.05rem;
   }
 
-  /* Descriptions */
   .feature-desc {
     font-size: 0.95rem;
     line-height: 1.65;
   }
 
-}
-
-
-#products {
-  scroll-margin-top: 6rem;
 }
