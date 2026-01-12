@@ -1,15 +1,29 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 Astro.response.status = 404;
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Page not found</title>
-    <meta name="robots" content="noindex" />
-  </head>
-  <body>
-    <h1>404 — Page not found</h1>
-    <p>This page no longer exists.</p>
-  </body>
-</html>
+<BaseLayout
+  title="Page not found — Nexusario"
+  description="This page no longer exists."
+>
+  <section class="nf-wrap nf-full">
+    <div class="nf-inner">
+      <p class="nf-eyebrow" style="font-size: large;">404 Error</p><br />
+
+      <h1 class="nf-title">
+        This page no longer exists.
+      </h1>
+
+      <p class="nf-desc">
+        The link you followed may be outdated or the page has been removed.
+      </p><br />
+
+      <a href="/" class="nf-btn">
+        Go to Home
+      </a>
+    </div>
+  </section>
+
+  <meta name="robots" content="noindex" />
+</BaseLayout>
