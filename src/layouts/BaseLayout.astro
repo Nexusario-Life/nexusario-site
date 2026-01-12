@@ -10,7 +10,13 @@ const {
   title = "Nexusario",
   description
 } = Astro.props;
+
+const canonicalPath =
+      Astro.url.pathname.endsWith("/")
+        ? Astro.url.pathname
+        : `${Astro.url.pathname}/`;
 ---
+
 
 <!doctype html>
 <html lang="en-IN">
@@ -18,9 +24,10 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
     <link
       rel="canonical"
-      href={`https://nexusario.com${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`}
+      href={`https://nexusario.com${canonicalPath}`}
     />
 
     <meta
