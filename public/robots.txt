@@ -1,18 +1,42 @@
+# =========================================================
+# ROBOTS.TXT FOR NEXUSARIO
+# Goal: Allow Search Engines (SEO) | Block AI Training
+# =========================================================
+
+# 1. ALLOW STANDARD SEARCH ENGINES
+# This allows Google, Bing, Yahoo, etc. to rank your products.
 User-agent: *
 Allow: /
 
-# Block internal or non-public paths if any appear later
-Disallow: /api/
-Disallow: /_astro/
-Disallow: /admin/
+# 2. BLOCK GOOGLE AI (TRAINING ONLY)
+# "Google-Extended" stops Gemini training but keeps Google Search working.
+User-agent: Google-Extended
+Disallow: /
 
-# Allow important pages
-Allow: /products/
-Allow: /about
-Allow: /contact
-Allow: /privacy
-Allow: /terms
-Allow: /disclaimer
+# 3. BLOCK OPENAI (ChatGPT)
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
 
-# Sitemap will be added next
+# 4. BLOCK COMMON CRAWL
+# Used by many open-source AI models.
+User-agent: CCBot
+Disallow: /
+
+# 5. BLOCK ANTHROPIC (Claude)
+User-agent: ClaudeBot
+Disallow: /
+
+# 6. BLOCK FACEBOOK / META AI
+User-agent: FacebookBot
+Disallow: /
+
+# 7. BLOCK APPLE AI
+# "Applebot-Extended" blocks AI training but allows Siri/Spotlight search.
+User-agent: Applebot-Extended
+Disallow: /
+
+# 8. SITEMAP LOCATION
+# Replace with your actual sitemap URL if you have one.
 Sitemap: https://nexusario.com/sitemap.xml
